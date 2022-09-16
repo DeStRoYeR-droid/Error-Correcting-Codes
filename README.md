@@ -8,4 +8,4 @@ This repository contains implementation of Error Correcting Codes (ECC for short
 
 To learn more about Error Correction Codes, I personally recommend the following videos -
 
--
+- [About Error Correction Codes and Hamming Code](https://www.youtube.com/watch?v=X8jsijhllIA)

@@ -1,3 +1,4 @@
+// Hamming Code by DeStRoYeR4
 #include <iostream>
 
 using namespace std;

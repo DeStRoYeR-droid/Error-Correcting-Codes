@@ -93,21 +93,35 @@ public:
 	
 	// Method to encode the dividend using the generating function
 	int encode(){
+		/*
+		Params :
+			None
+		Returns :
+			An integer (base 10) signifying the value of the code after encoding with the generating function
+		*/
+
+		// Step 1 - Initialise variable to store the result (remainder).
 		int result = 0;
 		
+		// Step 2 - Add length(generating function) - 1 0's to the end of dividend
 		bool* div_extended = new bool[len_div + len_gen - 1];
 		for (int i = 0; i < (len_div + len_gen -1); i++){
 			if (i >= len_div) div_extended[i] = false;
 			else div_extended[i] = div[i];
 		}
 		
+		// Step 3 - Get the first length(generating function) bits of the dividend
 		bool * temp = new bool[len_gen];
 		for (int i = 0; i < len_gen; i++){
 			temp[i] = div_extended[i];
 		}
 		
+		// Step 3.5 - Initialise a pointer variable to know which index of the extended dividend we are working with
 		int cur_pointer = len_gen;
+
+		// Step 4 - Loop while the pointer variable initialised is less than length of extended dividend
 		while (cur_pointer <= len_gen + len_div - 1){
+			// Perform bit-wise XOR on the basis of the first value of the dividend
 			if (temp[0]){
 				result = result + 1;
 			
@@ -122,21 +136,31 @@ public:
 				}
 			}
 			
+			// Remove the first bit of the dividend and add the bit at the pointer variable to the mix
 			for (int i = 0; i < len_gen-1; i++){
 				temp[i] = temp[i+1];
 			}
 			temp[len_gen - 1] = div_extended[cur_pointer];
+			
+			// Bit shift result to 1
 			result = result << 1;
+			// Increase the value of pointer variable
 			cur_pointer++;
 		}
 		
+		// Step 5 - Convert the binary value to a decimal value
 		int encoded_value = convert_to_number(div_extended , len_gen + len_div -1) + convert_to_number(temp , len_gen - 1);
+		
+		// Step 6 - Add the remainder to the end of the dividend
 		for (int i = len_div; i < len_div + len_gen -1; i++){
 			div_extended[i] = temp[i - (len_div)];
 		}
 		
+		// Display the encoded value
 		cout << "Encoded value = ";
 		display_boolean(div_extended , len_div + len_gen -1);
+
+		// Return its decimal equivalent 
 		return encoded_value ;
 	}
 	

@@ -51,8 +51,10 @@ private:
 	bool *gen;		// Boolean array to store the generating function 
 
 public:
-	// Constructor
+	// Constructor (empty...)
+	// You can add the code from the >> operator over here if you want to
 	CRC(){}
+	// Or you can make a proper parameterized constructor
 
 	// Overloading >> operator
 	friend istream& operator>> (istream &in, CRC &input){
@@ -166,13 +168,25 @@ public:
 	
 	// Method to decode the given the dividend using the generating function
 	bool decode(){
+		/*
+		Params :
+			None
+		Returns :
+			A boolean specifying whether the dividend is correct or not on the basis of the generating function
+		*/
+
+		// Step 1 - Get the first length(generating function) bits of the dividend
 		bool *temp = new bool[len_gen];
 		for (int i = 0; i < len_gen; i++){
 			temp[i] = div[i];
 		}
 		
+		// Step 1.5 - Initialise a pointer variable to know which index of the extended dividend we are working with
 		int cur_pointer = len_gen;
+
+		// Step 2 - Loop while the pointer variable initialised is less than length of extended dividend
 		while (cur_pointer <= len_div){
+			// Perform bit-wise XOR on the basis of the first value of the dividend
 			if (temp[0]){
 				for (int i = 0; i < len_gen; i++){
 					temp[i] = temp[i] ^ gen[i];
@@ -184,18 +198,23 @@ public:
 					temp[i] = temp[i] ^ 0;
 				}
 			}
-			
+
+			// Remove the first bit of the dividend and add the bit at the pointer variable to the mix
 			for (int i = 0; i < len_gen-1; i++){
 				temp[i] = temp[i+1];
 			}
 			temp[len_gen - 1] = div[cur_pointer];
 			
+			// Increment the value of pointer variable
 			cur_pointer++;
 		}
 		
+		// If any of the value after performing the iterative XOR is 1, return false.
 		for (int i = 0; i < len_gen; i++){
 			if (temp[i])  return false;
 		}
+
+		// Else return true
 		return true;
 	}
 };

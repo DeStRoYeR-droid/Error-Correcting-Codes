@@ -15,7 +15,7 @@ This repository contains implementation of Error Correcting Codes (ECC for short
 The following ECC's have been discussed in this repository so far 😉-
 
 - [Hamming Code (Code ✔, documentation 😓)](https://en.wikipedia.org/wiki/Hamming_code)
-- [Cyclic Redundancy Check (Code ✔, documentation 😓)](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)
+- [Cyclic Redundancy Check (Code ✔, documentation ✔)](https://en.wikipedia.org/wiki/Cyclic_redundancy_check)
 
 ---
 

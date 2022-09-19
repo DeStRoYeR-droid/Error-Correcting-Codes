@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void display_boolean(bool * arr , int length){
+void display_boolean(const bool * arr , const int length){
 	/*
 	Params :
 		arr 	: 	boolean array
@@ -22,7 +22,7 @@ void display_boolean(bool * arr , int length){
 	cout << endl;
 }
 
-int convert_to_number(bool *arr , int length){
+int convert_to_number(const bool *arr , const int length){
 	/*
 	Params 	:
 		arr		: 	boolean array
@@ -53,7 +53,24 @@ private:
 public:
 	// Constructor (empty...)
 	// You can add the code from the >> operator over here if you want to
-	CRC(){}
+	CRC(){
+		cout << "Please enter the length of generating function ";
+		cin >> this->len_gen;
+
+		cout << "Please enter the length of dividend ";
+		cin >> this->len_div;
+		
+		this->gen = new bool[this->len_gen];
+		this->div = new bool[this->len_div + this->len_gen - 1];
+		
+		for (int i = 0; i < this->len_gen; i++){
+			cin >> this->gen[i];
+		}
+		
+		for (int i = 0; i < (this->len_div); i++){
+			cin >> this->div[i];
+		}
+	}
 	// Or you can make a proper parameterized constructor
 
 	// Overloading >> operator
@@ -74,6 +91,7 @@ public:
 		for (int i = 0; i < (input.len_div); i++){
 			in >> input.div[i];
 		}
+		return in;
 	}
 	
 	// Overloading << operator
@@ -91,10 +109,11 @@ public:
 			else cout << "0";
 		}
 		out << endl;
+		return out;
 	}
 	
 	// Method to encode the dividend using the generating function
-	int encode(){
+	int encode() const{
 		/*
 		Params :
 			None
@@ -167,7 +186,7 @@ public:
 	}
 	
 	// Method to decode the given the dividend using the generating function
-	bool decode(){
+	bool decode() const{
 		/*
 		Params :
 			None
@@ -221,9 +240,11 @@ public:
 
 int main(){
 	CRC example;
-	
-	cin >> example;
+
 	cout << example;
+	example.encode();
+
+	cin >> example;
 	cout << example.decode() << endl;
 	
 	return 0;

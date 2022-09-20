@@ -52,7 +52,6 @@ private:
 
 public:
 	// Constructor (empty...)
-	// You can add the code from the >> operator over here if you want to
 	CRC(){
 		cout << "Please enter the length of generating function ";
 		cin >> this->len_gen;

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-bool isPower(const int n , const int base){
+bool isPower(int n , const int base){
 	/*
 	Params :
 		n		:	the number which needs to be tested
